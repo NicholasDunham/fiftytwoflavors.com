@@ -1,25 +1,15 @@
 import Link from "next/link";
 import getPostMetadata from "@/components/getPostMetadata";
+import PostPreview from "@/components/PostPreview";
 
 const HomePage = () => {
   const postMetadata = getPostMetadata();
-  const postPreviews = postMetadata.map((post) => {
-    return (
-      <li key="{post.slug}">
-        <h2>
-          <Link href={`/posts/${post.slug}`}>{post.title}</Link>
-        </h2>
-        <p>{post.subtitle}</p>
-        <p>{post.date}</p>
-      </li>
-    );
-  });
+  const postPreviews = postMetadata.map((post) => (
+    <PostPreview key={post.slug} {...post} />
+  ));
 
   return (
-    <>
-      <h1>My Blog</h1>
-      <ul>{postPreviews}</ul>
-    </>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">{postPreviews}</div>
   );
 };
 
