@@ -1,32 +1,43 @@
-import fs from "fs";
-import Markdown from "markdown-to-jsx";
-import matter from "gray-matter";
-import getPostMetadata from "@/components/getPostMetadata";
+import { allPosts } from "contentlayer/generated";
+import { notFound } from "next/navigation";
+import { useMDXComponent } from "next-contentlayer/hooks";
+import type { MDXComponents } from "mdx/types";
 
-const getPostContent = (slug: string) => {
-  const folder = "posts/";
-  const content = fs.readFileSync(`${folder}${slug}.md`, "utf8");
-  const matterResult = matter(content);
-  return matterResult;
+import Link from "next/link";
+// import FakeComponent from "@/app/components/FakeComponent";
+// ^ This component is just a placeholder, it will give you an error, remove it.
+
+const mdxComponents: MDXComponents = {
+  //   FakeComponent,
+  a: ({ href, children }) => <Link href={href as string}>{children}</Link>,
 };
 
-export const generateStaticParams = async () => {
-  const posts = getPostMetadata();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-};
+const PostLayout = ({ params }: { params: { slug: string } }) => {
+  const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
+  if (!post) notFound();
 
-const PostPage = (props: any) => {
-  const slug = props.params.slug;
-  const post = getPostContent(slug);
+  const MDXContent = useMDXComponent(post.body.code);
 
   return (
-    <>
-      <h1>{post.data.title}</h1>
-      <Markdown>{post.content}</Markdown>
-    </>
+    <article className="mx-auto max-w-xl py-8">
+      <div className="mb-8 text-center">
+        <time dateTime={post.date} className="mb-1 text-xs text-gray-600">
+          {new Intl.DateTimeFormat("en-US").format(new Date(post.date))}
+        </time>
+        <h1 className="text-3xl font-bold">{post.title}</h1>
+      </div>
+      <MDXContent components={mdxComponents} />
+    </article>
   );
 };
 
-export default PostPage;
+export default PostLayout;
+
+export const generateStaticParams = async () =>
+  allPosts.map((post) => ({ slug: post._raw.flattenedPath }));
+
+export const generateMetadata = ({ params }: { params: { slug: string } }) => {
+  const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
+  if (!post) notFound();
+  return { title: post.title };
+};

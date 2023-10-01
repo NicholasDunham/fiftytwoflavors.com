@@ -1,16 +1,21 @@
-import Link from "next/link";
-import getPostMetadata from "@/components/getPostMetadata";
-import PostPreview from "@/components/PostPreview";
+import { allPosts } from "contentlayer/generated";
+// ^ You're probably going to get an error, but we'll fix it later
+import PostCard from "components/PostCard";
+import { Post } from "@/contentlayer.config";
 
-const HomePage = () => {
-  const postMetadata = getPostMetadata();
-  const postPreviews = postMetadata.map((post) => (
-    <PostPreview key={post.slug} {...post} />
-  ));
+export default function Home() {
+  const posts = allPosts.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">{postPreviews}</div>
+    <div className="mx-auto max-w-xl py-8">
+      <h1 className="mb-8 text-center text-2xl font-black">
+        Next.js + Contentlayer Example
+      </h1>
+      {posts.map((post, idx) => (
+        <PostCard key={idx} {...post} />
+      ))}
+    </div>
   );
-};
-
-export default HomePage;
+}
