@@ -11,7 +11,27 @@
 	"mounts": [
 		"source=${env:HOME}${env:USERPROFILE}/.aws,target=/home/node/.aws,type=bind,consistency=cached",
 		"source=${env:HOME}${env:USERPROFILE}/.ssh,target=/home/node/.ssh,type=bind,consistency=cached"
-	]
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"formulahendry.auto-rename-tag",
+				"PulkitGangwar.nextjs-snippets",
+				"csstools.postcss",
+				"bradlc.vscode-tailwindcss",
+				"esbenp.prettier-vscode",
+				"unifiedjs.vscode-mdx",
+				"hashicorp.terraform",
+				"amazonwebservices.aws-toolkit-vscode",
+				"dbaeumer.vscode-eslint",
+				"GitHub.copilot",
+				"GitHub.copilot-chat",
+				"GitHub.copilot-labs",
+				"GitHub.vscode-pull-request-github",
+				"eamodio.gitlens"
+			]
+		}
+	}
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
