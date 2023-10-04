@@ -2,8 +2,9 @@ import { allPosts } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import type { MDXComponents } from "mdx/types";
-
 import Link from "next/link";
+import formatDate from "@/components/formatDate";
+
 // import FakeComponent from "@/app/components/FakeComponent";
 // ^ This component is just a placeholder, it will give you an error, remove it.
 
@@ -22,7 +23,7 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
     <article className="mx-auto max-w-xl py-8">
       <div className="mb-8 text-center">
         <time dateTime={post.date} className="mb-1 text-xs text-gray-600">
-          {new Intl.DateTimeFormat("en-US").format(new Date(post.date))}
+          {formatDate(post.date)}
         </time>
         <h1 className="text-3xl font-bold">{post.title}</h1>
       </div>

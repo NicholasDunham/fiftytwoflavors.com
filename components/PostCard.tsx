@@ -1,7 +1,7 @@
 "use client";
+import formatDate from "./formatDate";
 
 import { Post } from "contentlayer/generated";
-// ^ You're probably going to get an error, but we'll fix it later
 import Link from "next/link";
 
 export default function PostCard(post: Post) {
@@ -16,7 +16,7 @@ export default function PostCard(post: Post) {
         </Link>
       </h2>
       <time dateTime={post.date} className="mb-2 block text-xs text-gray-600">
-        {new Intl.DateTimeFormat("en-US").format(new Date(post.date))}
+        {formatDate(post.date)}
       </time>
     </div>
   );
