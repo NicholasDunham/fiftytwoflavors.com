@@ -44,6 +44,14 @@ const Recipe = defineNestedType(() => ({
   },
 }));
 
+const Update = defineNestedType(() => ({
+  name: 'Update',
+  fields: {
+    date: { type: "date", required: true },
+    content: { type: "markdown", required: true },
+  },
+}));
+
 export const Post = defineDocumentType(() => ({
   name: "Post",
   filePathPattern: `**/*.mdx`,
@@ -54,6 +62,7 @@ export const Post = defineDocumentType(() => ({
     tags: { type: "list", of: { type: "string" }, required: true },
     abstract: { type: "markdown", required: true },
     recipe: { type: "nested", of: Recipe, required: false },
+    updates: {type: "list", of: Update, required: false},
   },
   computedFields: {
     url: {
