@@ -1,6 +1,6 @@
 import { contentDirExcludeDefault } from "contentlayer/source-files";
 
-export default function Recipe(props: {
+export default function RecipeCard(props: {
   children: React.ReactNode;
   recipe: Recipe;
 }) {

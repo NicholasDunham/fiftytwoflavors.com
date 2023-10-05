@@ -4,11 +4,11 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import formatDate from "@/components/formatDate";
-import Recipe from "@/components/Recipe";
+import RecipeCard from "@/components/RecipeCard";
 import fs from "fs";
 
 const mdxComponents: MDXComponents = {
-  Recipe,
+  RecipeCard,
   a: ({ href, children }) => <Link href={href as string}>{children}</Link>,
 };
 
