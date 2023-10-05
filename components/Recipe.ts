@@ -1,27 +1,27 @@
-type Ingredient = {
+export type Ingredient = {
     name: string;
     amount: string;
     optional: boolean;
 };
 
-type IngredientGroup = {
+export type IngredientGroup = {
     name: string;
     ingredients: Ingredient[];
     optional: boolean;
 };
 
-type Direction = {
+export type Direction = {
     instruction: string;
     optional: boolean;
 };
 
-type DirectionGroup = {
+export type DirectionGroup = {
     name: string;
     directions: Direction[];
     optional: boolean;
 };
 
-type Recipe = {
+export type Recipe = {
     name: string;
     ingredients: (Ingredient | IngredientGroup)[];
     directions: (Direction | DirectionGroup)[];

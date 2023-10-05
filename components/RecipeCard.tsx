@@ -1,4 +1,5 @@
 import { contentDirExcludeDefault } from "contentlayer/source-files";
+import { Recipe } from "./Recipe";
 
 export default function RecipeCard(props: {
   children: React.ReactNode;

@@ -5,7 +5,6 @@ import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import formatDate from "@/components/formatDate";
 import RecipeCard from "@/components/RecipeCard";
-import fs from "fs";
 
 const mdxComponents: MDXComponents = {
   RecipeCard,
@@ -15,16 +14,6 @@ const mdxComponents: MDXComponents = {
 const PostLayout = ({ params }: { params: { slug: string } }) => {
   const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
   if (!post) notFound();
-
-  /*
-  console.log("/posts/" + params.slug + ".recipe.ts");
-
-  if (fs.existsSync("@posts/" + params.slug + "recipe.ts")) {
-    console.log("recipe.ts exists");
-  } else {
-    console.log("recipe.ts does not exist");
-  }
-  */
 
   const MDXContent = useMDXComponent(post.body.code);
 
