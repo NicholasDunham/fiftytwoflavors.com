@@ -1,0 +1,60 @@
+---
+title: Recipe Test
+date: 2023-10-04
+tags:
+  - recipe
+abstract: This is a test recipe.
+---
+
+export const recipe = {
+  name: "Recipe Test",
+  ingredients: [
+    {
+      name: "Ingredient 1",
+      amount: "1",
+      optional: false,
+    },
+    {
+      name: "Ingredient 2",
+      amount: "2",
+      optional: true,
+    },
+    {
+      name: "Stabilizers",
+      ingredients: [
+        {
+          name: "Ingredient 3",
+          amount: "3",
+          optional: false,
+        },
+        {
+          name: "Ingredient 4",
+          amount: "4",
+          optional: true,
+        },
+      ],
+    },
+  ],
+  directions: [
+    {
+      instruction: "Step 1",
+      optional: false,
+    },
+    {
+      instruction: "Step 2",
+      optional: false,
+    },
+    {
+      instruction: "Step 2",
+      optional: false,
+    },
+  ],
+};
+
+Here's a test recipe:
+
+<Recipe recipe={recipe}>
+
+Test
+
+</Recipe>

@@ -4,18 +4,27 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import formatDate from "@/components/formatDate";
-
-// import FakeComponent from "@/app/components/FakeComponent";
-// ^ This component is just a placeholder, it will give you an error, remove it.
+import Recipe from "@/components/Recipe";
+import fs from "fs";
 
 const mdxComponents: MDXComponents = {
-  //   FakeComponent,
+  Recipe,
   a: ({ href, children }) => <Link href={href as string}>{children}</Link>,
 };
 
 const PostLayout = ({ params }: { params: { slug: string } }) => {
   const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
   if (!post) notFound();
+
+  /*
+  console.log("/posts/" + params.slug + ".recipe.ts");
+
+  if (fs.existsSync("@posts/" + params.slug + "recipe.ts")) {
+    console.log("recipe.ts exists");
+  } else {
+    console.log("recipe.ts does not exist");
+  }
+  */
 
   const MDXContent = useMDXComponent(post.body.code);
 
