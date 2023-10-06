@@ -1,46 +1,73 @@
+import React, { FC } from "react";
 import {
   Ingredient,
   Ingredients,
+  IngredientGroup,
   Direction,
   Directions,
-  Grouping,
+  DirectionGroup,
   Recipe,
 } from "./Recipe";
 
-const Ingredient = (ingredient: Ingredient) => {
-  return (
-    <li>
-      {ingredient.amount} {ingredient.unit} {ingredient.name}
-    </li>
-  );
-};
-
-const Grouper = (group: Grouping, f: any) => {
+const Section: FC<{ heading: string; children: React.ReactNode }> = ({
+  heading,
+  children,
+}) => {
   return (
     <>
-      <h4 className="mb-1 text-lg">{group.heading}</h4>
-      <ul>{group.items.map((item, idx) => f(item, idx))}</ul>
+      <h3 className="mb-1 text-lg">{heading}</h3>
+      <>{children}</>
     </>
   );
 };
 
-const Ingredients = (ingredients: Ingredients) => {
-  console.log(Array.isArray(ingredients));
-  // return (
-  //   <>
-  //     <h3 className="mb-1 text-lg">Ingredients</h3>
-  //     {ingredients.map((item, idx) => {
-  //       if (item.type === "Ingredient") {
-  //         return <Ingredient {...item} key={idx} />;
-  //       } else {
-  //         return <Grouper {...item} {...Ingredient} key={idx} />;
-  //       }
-  //     })}
-  //   </>
-  // );
+const Subsection: FC<{ heading: string; children: React.ReactNode }> = ({
+  heading,
+  children,
+}) => {
+  return (
+    <>
+      <h4 className="mb-1 text-md">{heading}</h4>
+      <>{children}</>
+    </>
+  );
 };
 
-const Procedure = (directions: Directions) => {
+const Ingredient: FC<{ ingredient: Ingredient }> = (props) => {
+  const { ingredient } = props;
+  return (
+    <li>
+      {ingredient.amount}
+      {ingredient.unit} {ingredient.name}
+    </li>
+  );
+};
+
+const Ingredients: FC<{ ingredients: Ingredients }> = (props) => {
+  const { ingredients } = props;
+
+  return (
+    <Section heading="Ingredients">
+      {ingredients.map((item, idx) => {
+        if (item.type === "Ingredient") {
+          return <Ingredient ingredient={item} key={idx} />;
+        } else if (item.type === "IngredientGroup") {
+          return (
+            <Subsection heading={item.heading} key="idx">
+              {item.ingredients.map((ingredient, idx) => (
+                <Ingredient ingredient={ingredient} key={idx} />
+              ))}
+            </Subsection>
+          );
+        }
+      })}
+    </Section>
+  );
+};
+
+const Procedure: FC<{ directions: Directions }> = (props) => {
+  const { directions } = props;
+
   return (
     <>
       <h3 className="mb-1 text-lg">Procedure</h3>
@@ -49,7 +76,7 @@ const Procedure = (directions: Directions) => {
   );
 };
 
-const Notes = (notes: string[]) => {
+const Notes: FC<{ notes: string[] }> = (props) => {
   return (
     <>
       <h3 className="mb-1 text-lg">Notes</h3>
@@ -60,14 +87,12 @@ const Notes = (notes: string[]) => {
 
 export default function RecipeCard(props: { recipe: Recipe }) {
   const { name, ingredients, directions, notes } = props.recipe;
-  console.log("Recipe props: ", props.recipe);
-  // console.log(typeof ingredients)
   return (
     <div className="mb-8">
       <h2 className="mb-1 text-xl">{name}</h2>
-      {/* <Ingredients {...ingredients} /> */}
-      <Procedure {...directions} />
-      {notes && <Notes {...notes} />}
+      <Ingredients ingredients={ingredients} />
+      <Procedure directions={directions} />
+      {notes && <Notes notes={notes} />}
     </div>
   );
 }

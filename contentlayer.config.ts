@@ -10,6 +10,15 @@ const Ingredient = defineNestedType(() => ({
   },
 }));
 
+const IngredientGroup = defineNestedType(() => ({
+  name: 'IngredientGroup',
+  fields: {
+    heading: { type: "string", required: true },
+    ingredients: { type: "list", of: Ingredient, required: true },
+    optional: { type: "boolean", default: false },
+  },
+}));
+
 const Direction = defineNestedType(() => ({
   name: 'Direction',
   fields: {
@@ -18,11 +27,11 @@ const Direction = defineNestedType(() => ({
   },
 }));
 
-const Grouping = defineNestedType(() => ({
-  name: 'Grouping',
+const DirectionGroup = defineNestedType(() => ({
+  name: 'DirectionGroup',
   fields: {
     heading: { type: "string", required: true },
-    items: { type: "list", of: [Ingredient, Direction], required: true },
+    steps: { type: "list", of: Direction, required: true },
     optional: { type: "boolean", default: false },
   },
 }));
@@ -31,8 +40,8 @@ const Recipe = defineNestedType(() => ({
   name: 'Recipe',
   fields: {
     name: { type: "string", required: true },
-    ingredients: { type: "list", of: [Ingredient, Grouping], required: true },
-    directions: { type: "list", of: [Direction, Grouping], required: true },
+    ingredients: { type: "list", of: [Ingredient, IngredientGroup], required: true },
+    directions: { type: "list", of: [Direction, DirectionGroup], required: true },
     notes: { type: "list", of: {type: "markdown"}, required: false },
   },
 }));

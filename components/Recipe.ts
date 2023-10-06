@@ -1,5 +1,3 @@
-import { Interface } from "readline";
-
 export type Ingredient = {
     type: "Ingredient";
     name: string;
@@ -8,25 +6,32 @@ export type Ingredient = {
     optional: boolean;
 };
 
+export type IngredientGroup = {
+    type: "IngredientGroup";
+    heading: string;
+    ingredients: Ingredient[];
+    optional: boolean;
+};
+
 export type Direction = {
     type: "Direction";
-    name: string;
+    step: string;
     optional: boolean;
 };
 
-export type Grouping = {
-    type: "Grouping";
+export type DirectionGroup = {
+    type: "DirectionGroup";
     heading: string;
-    items: (Ingredient | Direction)[];
+    steps: Direction[];
     optional: boolean;
 };
 
-export type Ingredients = (Ingredient | Grouping)[];
-export type Directions = (Direction | Grouping)[];
+export type Ingredients = (Ingredient | IngredientGroup)[];
+export type Directions = (Direction | DirectionGroup)[];
 
 export type Recipe = {
     name: string;
-    ingredients: (Ingredient | Grouping)[];
-    directions: (Direction | Grouping)[];
+    ingredients: Ingredients;
+    directions: Directions;
     notes?: string[];
 };
