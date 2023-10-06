@@ -33,8 +33,7 @@ const Subsection: FC<{ heading: string; children: React.ReactNode }> = ({
   );
 };
 
-const Ingredient: FC<{ ingredient: Ingredient }> = (props) => {
-  const { ingredient } = props;
+const Ingredient: FC<{ ingredient: Ingredient }> = ({ ingredient }) => {
   return (
     <li>
       {ingredient.amount}
@@ -43,9 +42,7 @@ const Ingredient: FC<{ ingredient: Ingredient }> = (props) => {
   );
 };
 
-const Ingredients: FC<{ ingredients: Ingredients }> = (props) => {
-  const { ingredients } = props;
-
+const Ingredients: FC<{ ingredients: Ingredients }> = ({ ingredients }) => {
   return (
     <Section heading="Ingredients">
       {ingredients.map((item, idx) => {
@@ -65,23 +62,37 @@ const Ingredients: FC<{ ingredients: Ingredients }> = (props) => {
   );
 };
 
-const Procedure: FC<{ directions: Directions }> = (props) => {
-  const { directions } = props;
+const Direction: FC<{ direction: Direction }> = ({ direction }) => {
+  return <li>{direction.step}</li>;
+};
 
+const Procedure: FC<{ directions: Directions }> = ({ directions }) => {
   return (
-    <>
-      <h3 className="mb-1 text-lg">Procedure</h3>
-      <p>This is where the directions will go.</p>
-    </>
+    <Section heading="Procedure">
+      {directions.map((item, idx) => {
+        if (item.type === "Direction") {
+          return <Direction direction={item} key={idx} />;
+        } else if (item.type === "DirectionGroup") {
+          return (
+            <Subsection heading={item.heading} key="idx">
+              {item.steps.map((direction, idx) => (
+                <Direction direction={direction} key={idx} />
+              ))}
+            </Subsection>
+          );
+        }
+      })}
+    </Section>
   );
 };
 
-const Notes: FC<{ notes: string[] }> = (props) => {
+const Notes: FC<{ notes: string[] }> = ({ notes }) => {
   return (
-    <>
-      <h3 className="mb-1 text-lg">Notes</h3>
-      <p>This is where the notes will go.</p>
-    </>
+    <Section heading="Notes">
+      {notes.map((note, idx) => (
+        <p key={idx}>{note}</p>
+      ))}
+    </Section>
   );
 };
 
