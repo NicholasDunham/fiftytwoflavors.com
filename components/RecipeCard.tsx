@@ -1,15 +1,13 @@
-import React, { FC } from "react";
-import {
+import type { FC, ReactNode } from "react";
+import type {
   Ingredient,
   Ingredients,
-  IngredientGroup,
   Direction,
   Directions,
-  DirectionGroup,
   Recipe,
 } from "./Recipe";
 
-const Section: FC<{ heading: string; children: React.ReactNode }> = ({
+const Section: FC<{ heading: string; children: ReactNode }> = ({
   heading,
   children,
 }) => {
@@ -21,7 +19,7 @@ const Section: FC<{ heading: string; children: React.ReactNode }> = ({
   );
 };
 
-const Subsection: FC<{ heading: string; children: React.ReactNode }> = ({
+const Subsection: FC<{ heading: string; children: ReactNode }> = ({
   heading,
   children,
 }) => {

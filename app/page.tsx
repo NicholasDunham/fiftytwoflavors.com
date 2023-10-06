@@ -1,7 +1,6 @@
 import { allPosts } from "contentlayer/generated";
 // ^ You're probably going to get an error, but we'll fix it later
 import PostCard from "components/PostCard";
-import { Post } from "@/contentlayer.config";
 
 export default function Home() {
   const posts = allPosts.sort(
