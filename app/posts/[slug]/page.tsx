@@ -5,11 +5,13 @@ import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import formatDate from "@/components/formatDate";
 import { RecipeCard, Section, Subsection } from "@/components/RecipeCard";
+import { CMC } from "@/components/abbreviations";
 
 const mdxComponents: MDXComponents = {
   RecipeCard,
   Section,
   Subsection,
+  CMC,
   a: ({ href, children }) => <Link href={href as string}>{children}</Link>,
 };
 
