@@ -3,9 +3,9 @@ import { notFound } from "next/navigation";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
-import formatDate from "@/components/formatDate";
-import { RecipeCard, Section, Subsection } from "@/components/RecipeCard";
-import { CMC } from "@/components/abbreviations";
+import formatDate from "@/app/components/formatDate";
+import { RecipeCard, Section, Subsection } from "@/app/components/RecipeCard";
+import { CMC } from "@/app/components/abbreviations";
 
 const mdxComponents: MDXComponents = {
   RecipeCard,
