@@ -4,18 +4,18 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import formatDate from "@/components/formatDate";
-import RecipeCard from "@/components/RecipeCard";
+import { RecipeCard, Section, Subsection } from "@/components/RecipeCard";
 
 const mdxComponents: MDXComponents = {
   RecipeCard,
+  Section,
+  Subsection,
   a: ({ href, children }) => <Link href={href as string}>{children}</Link>,
 };
 
 const PostLayout = ({ params }: { params: { slug: string } }) => {
   const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
   if (!post) notFound();
-
-  // console.log(post.recipe);
 
   const MDXContent = useMDXComponent(post.body.code);
 
