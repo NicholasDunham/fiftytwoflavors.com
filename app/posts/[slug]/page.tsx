@@ -15,6 +15,8 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
   const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
   if (!post) notFound();
 
+  // console.log(post.recipe);
+
   const MDXContent = useMDXComponent(post.body.code);
 
   return (

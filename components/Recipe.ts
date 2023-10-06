@@ -1,28 +1,32 @@
-export type Ingredient = {
-    name: string;
-    amount: string;
-    optional: boolean;
-};
+import { Interface } from "readline";
 
-export type IngredientGroup = {
+export type Ingredient = {
+    type: "Ingredient";
     name: string;
-    ingredients: Ingredient[];
+    amount?: number;
+    unit?: string;
     optional: boolean;
 };
 
 export type Direction = {
-    instruction: string;
+    type: "Direction";
+    name: string;
     optional: boolean;
 };
 
-export type DirectionGroup = {
-    name: string;
-    directions: Direction[];
+export type Grouping = {
+    type: "Grouping";
+    heading: string;
+    items: (Ingredient | Direction)[];
     optional: boolean;
 };
+
+export type Ingredients = (Ingredient | Grouping)[];
+export type Directions = (Direction | Grouping)[];
 
 export type Recipe = {
     name: string;
-    ingredients: (Ingredient | IngredientGroup)[];
-    directions: (Direction | DirectionGroup)[];
+    ingredients: (Ingredient | Grouping)[];
+    directions: (Direction | Grouping)[];
+    notes?: string[];
 };

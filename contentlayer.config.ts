@@ -4,34 +4,26 @@ const Ingredient = defineNestedType(() => ({
   name: 'Ingredient',
   fields: {
     name: { type: "string", required: true },
-    amount: { type: "string", required: true },
-    optional: { type: "boolean", required: true },
-  },
-}));
-
-const IngredientGroup = defineNestedType(() => ({
-  name: 'IngredientGroup',
-  fields: {
-    name: { type: "string", required: true },
-    ingredients: { type: "list", of: Ingredient, required: true },
-    optional: { type: "boolean", required: true },
+    amount: { type: "number", required: true },
+    unit: { type: "string", required: false},
+    optional: { type: "boolean", default: false },
   },
 }));
 
 const Direction = defineNestedType(() => ({
   name: 'Direction',
   fields: {
-    instruction: { type: "string", required: true },
-    optional: { type: "boolean", required: true },
+    step: { type: "string", required: true },
+    optional: { type: "boolean", default: false },
   },
 }));
 
-const DirectionGroup = defineNestedType(() => ({
-  name: 'DirectionGroup',
+const Grouping = defineNestedType(() => ({
+  name: 'Grouping',
   fields: {
-    name: { type: "string", required: true },
-    directions: { type: "list", of: Direction, required: true },
-    optional: { type: "boolean", required: true },
+    heading: { type: "string", required: true },
+    items: { type: "list", of: [Ingredient, Direction], required: true },
+    optional: { type: "boolean", default: false },
   },
 }));
 
@@ -39,8 +31,9 @@ const Recipe = defineNestedType(() => ({
   name: 'Recipe',
   fields: {
     name: { type: "string", required: true },
-    ingredients: { type: "list", of: [Ingredient, IngredientGroup], required: true },
-    directions: { type: "list", of: [Direction, DirectionGroup], required: true },
+    ingredients: { type: "list", of: [Ingredient, Grouping], required: true },
+    directions: { type: "list", of: [Direction, Grouping], required: true },
+    notes: { type: "list", of: {type: "markdown"}, required: false },
   },
 }));
 
@@ -48,7 +41,7 @@ const Update = defineNestedType(() => ({
   name: 'Update',
   fields: {
     date: { type: "date", required: true },
-    content: { type: "markdown", required: true },
+    description: { type: "markdown", required: true },
   },
 }));
 

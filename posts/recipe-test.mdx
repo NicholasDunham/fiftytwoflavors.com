@@ -1,60 +1,54 @@
 ---
-title: Recipe Test
+title: A Test Recipe
 date: 2023-10-04
 tags:
   - recipe
 abstract: This is a test recipe.
+
+recipe:
+  name: Recipe Test
+  ingredients:
+    - type: Ingredient
+      name: Ingredient 1
+      amount: 1
+      unit: g
+    - type: Ingredient
+      name: Ingredient 2
+      amount: 2
+      unit: g
+    - type: Grouping
+      heading: Stabilizers
+      ingredients:
+        - name: Ingredient 3
+          amount: 3
+          unit: g
+        - name: Ingredient 4
+          amount: 4
+          unit: g
+  directions:
+    - type: Direction
+      step: Cook everything
+    - type: Grouping
+      heading: Mix-ins
+      directions:
+        - step: Mix some stuff in
+          optional: true
+    - type: Direction
+      step: Eat everything
+      optional: true
+  notes:
+    - This is a note.
+    - This is another note.
+
+updates:
+  - date: 2023-10-06
+    description: This is an update.
+  - date: 2023-10-08
+    description: This is another update.
 ---
 
-export const recipe = {
-  name: "Recipe Test",
-  ingredients: [
-    {
-      name: "Ingredient 1",
-      amount: "1",
-      optional: false,
-    },
-    {
-      name: "Ingredient 2",
-      amount: "2",
-      optional: true,
-    },
-    {
-      name: "Stabilizers",
-      ingredients: [
-        {
-          name: "Ingredient 3",
-          amount: "3",
-          optional: false,
-        },
-        {
-          name: "Ingredient 4",
-          amount: "4",
-          optional: true,
-        },
-      ],
-    },
-  ],
-  directions: [
-    {
-      instruction: "Step 1",
-      optional: false,
-    },
-    {
-      instruction: "Step 2",
-      optional: false,
-    },
-    {
-      instruction: "Step 2",
-      optional: false,
-    },
-  ],
-};
+Here's a test recipe.
 
-Here's a test recipe:
+<RecipeCard recipe={frontmatter.recipe} />
 
-<RecipeCard recipe={recipe}>
-
-Test
-
-</RecipeCard>
+This is looking good!
