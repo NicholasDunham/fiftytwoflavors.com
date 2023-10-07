@@ -1,19 +1,27 @@
 import Link from "next/link";
 import "@/styles/globals.css";
+import { Providers } from "./components/providers";
+import { ThemeButton } from "./components/ThemeButton";
 
 export const metadata = {
   title: "Fifty-two Flavors",
   description: "One year of home ice cream recipes.",
 };
 
-const header = (
-  <header className="text-center bg-slate-800 p-4 my-4 rounded-md">
-    <h1 className="text-3xl font-bold text-slate-200">
-      <Link href="/">Fifty-two Flavors</Link>
-    </h1>
-    <p className="text-slate-300">One year of ice cream experiments</p>
-  </header>
-);
+const Navbar = () => {
+  return (
+    <nav className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex justify-between h-16">
+        <div className="flex justify-between items-center w-full">
+          <Link href="/">
+            <h1 className="text-2xl font-medium">Fifty-two Flavors</h1>
+          </Link>
+          <ThemeButton />
+        </div>
+      </div>
+    </nav>
+  );
+};
 
 const footer = (
   <footer className="mt-4 border-t border-slate-800 py-4 text-slate-500">
@@ -29,13 +37,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <div className="mx-auto max-w-4xl">
-          {header}
-          {children}
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className="bg-white selection:bg-gray-50 text-black
+                   dark:bg-gray-900 dark:selection:bg-gray-900 dark:text-white"
+      >
+        <Providers>
+          <Navbar />
+          <main className="max-w-4xl mx-auto p-4 sm:px-6 lg:px-8">
+            {children}
+          </main>
           {footer}
-        </div>
+        </Providers>
       </body>
     </html>
   );

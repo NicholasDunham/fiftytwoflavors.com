@@ -7,6 +7,7 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx}",
     "./posts/**/*.{md,mdx}",
   ],
+  darkMode: "class",
   theme: {},
   plugins: [require("@tailwindcss/typography")],
 };
