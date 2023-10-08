@@ -10,7 +10,7 @@ export const metadata = {
 
 const Navbar = () => {
   return (
-    <nav className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="max-w-5xl mx-auto">
       <div className="flex justify-between h-16">
         <div className="flex justify-between items-center w-full">
           <Link href="/">
@@ -44,9 +44,7 @@ export default function RootLayout({
       >
         <Providers>
           <Navbar />
-          <main className="max-w-4xl mx-auto p-4 sm:px-6 lg:px-8">
-            {children}
-          </main>
+          <main className="max-w-5xl mx-auto border-2">{children}</main>
           {footer}
         </Providers>
       </body>

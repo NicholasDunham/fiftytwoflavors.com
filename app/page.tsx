@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <h2 className="text-xl mb-4">Recent posts</h2>
-      <div className=" flex flex-wrap ">
+      <div className="flex flex-wrap">
         {posts.map((post, idx) => (
           <PostCard key={idx} {...post} />
         ))}
