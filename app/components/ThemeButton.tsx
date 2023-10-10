@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState, type FC, type ReactNode } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 
-export const ThemeButton: FC = () => {
+const ThemeButton = () => {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -27,3 +27,5 @@ export const ThemeButton: FC = () => {
     </button>
   );
 };
+
+export default ThemeButton;
